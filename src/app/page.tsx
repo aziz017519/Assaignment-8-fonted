@@ -112,7 +112,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories */}
+      
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="text-center">
           <p className="font-bold uppercase tracking-widest text-orange-500">
@@ -145,7 +145,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Studios */}
       <section className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-5">
@@ -218,7 +217,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How It Works */}
+
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="text-center">
           <p className="font-bold uppercase tracking-widest text-orange-500">
@@ -248,7 +247,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Host CTA */}
+  
       <section className="px-6 pb-20 lg:px-8">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-orange-500 px-8 py-14 text-center text-white md:px-16">
           <h2 className="text-3xl font-extrabold sm:text-4xl">
