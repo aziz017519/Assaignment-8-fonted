@@ -74,12 +74,12 @@ export default async function StudioDetailsPage({
       <div className="mx-auto max-w-5xl">
 
         {/* Back Button */}
-        <Link
-          href="/"
-          className="font-semibold text-orange-500 transition hover:text-orange-600"
-        >
-          ← Back to Home
-        </Link>
+       <Link
+             href={`/booking/${studio._id}`}
+             className="inline-block rounded-lg bg-orange-500 px-6 py-3 font-semibold text-white hover:bg-orange-600"
+             >
+             Book This Studio →
+      </Link>
 
         {/* Studio Details Card */}
         <div className="mt-8 overflow-hidden rounded-3xl bg-white shadow-lg">
