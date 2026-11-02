@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { signOut, useSession } from "@/lib/auth-client";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -15,6 +16,19 @@ const navLinks = [
 const Navbar = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { data: session, isPending } = useSession();
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      setMenuOpen(false);
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm">
@@ -46,21 +60,54 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop Buttons */}
+        {/* Desktop Auth Buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/login"
-            className="rounded-lg px-4 py-2 font-semibold text-gray-700 transition hover:text-orange-500"
-          >
-            Login
-          </Link>
+          {isPending ? (
+            <span className="text-sm text-gray-400">Loading...</span>
+          ) : user ? (
+            <>
+              <div className="flex items-center gap-2">
+                {user.image ? (
+                  <img
+                    src={user.image}
+                    alt={user.name}
+                    className="h-9 w-9 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-100 font-bold text-orange-600">
+                    {user.name?.charAt(0).toUpperCase()}
+                  </div>
+                )}
 
-          <Link
-            href="/register"
-            className="rounded-lg bg-orange-500 px-5 py-2.5 font-semibold text-white transition hover:bg-orange-600"
-          >
-            Get Started
-          </Link>
+                <span className="font-semibold text-gray-700">
+                  {user.name}
+                </span>
+              </div>
+
+              <button
+                onClick={handleLogout}
+                className="rounded-lg bg-orange-500 px-5 py-2.5 font-semibold text-white transition hover:bg-orange-600"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="rounded-lg px-4 py-2 font-semibold text-gray-700 transition hover:text-orange-500"
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/register"
+                className="rounded-lg bg-orange-500 px-5 py-2.5 font-semibold text-white transition hover:bg-orange-600"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -95,21 +142,54 @@ const Navbar = () => {
 
             <hr className="border-gray-100" />
 
-            <Link
-              href="/login"
-              onClick={() => setMenuOpen(false)}
-              className="font-semibold text-gray-700"
-            >
-              Login
-            </Link>
+            {isPending ? (
+              <span className="text-sm text-gray-400">Loading...</span>
+            ) : user ? (
+              <>
+                <div className="flex items-center gap-3">
+                  {user.image ? (
+                    <img
+                      src={user.image}
+                      alt={user.name}
+                      className="h-9 w-9 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-100 font-bold text-orange-600">
+                      {user.name?.charAt(0).toUpperCase()}
+                    </div>
+                  )}
 
-            <Link
-              href="/register"
-              onClick={() => setMenuOpen(false)}
-              className="rounded-lg bg-orange-500 px-5 py-3 text-center font-semibold text-white"
-            >
-              Get Started
-            </Link>
+                  <span className="font-semibold text-gray-700">
+                    {user.name}
+                  </span>
+                </div>
+
+                <button
+                  onClick={handleLogout}
+                  className="rounded-lg bg-orange-500 px-5 py-3 text-center font-semibold text-white"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-semibold text-gray-700"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  href="/register"
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-lg bg-orange-500 px-5 py-3 text-center font-semibold text-white"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}
