@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+export const instant = false;
+
 const SERVER_URL =
   process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
 
@@ -266,11 +268,11 @@ export default async function HomePage() {
                         </p>
 
                         <Link
-                          href="/studios"
-                          className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-bold text-white hover:bg-orange-600"
-                        >
-                          Explore
-                        </Link>
+                             href={`/studios/${studio._id}`}
+                             className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-bold text-white hover:bg-orange-600"
+                            >
+                              View Details →
+                            </Link>
                       </div>
                     </div>
                   </article>
@@ -290,8 +292,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-{/* 
-      {/* How It Works Section */}
+
+     
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="text-center">
           <p className="font-bold uppercase tracking-widest text-orange-500">
@@ -351,7 +353,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Host CTA Section */}
+     
       <section className="px-6 pb-20 lg:px-8">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-orange-500 px-8 py-14 text-center text-white md:px-16">
           <h2 className="text-3xl font-extrabold sm:text-4xl">
@@ -370,7 +372,7 @@ export default async function HomePage() {
             Become a Host →
           </Link>
         </div>
-      </section> */}
+      </section>
 
     </main>
   );
