@@ -58,6 +58,19 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+
+          {user && (
+            <Link
+              href="/dashboard"
+              className={`text-sm font-semibold transition hover:text-orange-500 ${
+                pathname === "/dashboard"
+                  ? "text-orange-500"
+                  : "text-gray-600"
+              }`}
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
 
         {/* Desktop Auth Buttons */}
@@ -139,6 +152,20 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+
+            {user && (
+              <Link
+                href="/dashboard"
+                onClick={() => setMenuOpen(false)}
+                className={`font-semibold ${
+                  pathname === "/dashboard"
+                    ? "text-orange-500"
+                    : "text-gray-700"
+                }`}
+              >
+                Dashboard
+              </Link>
+            )}
 
             <hr className="border-gray-100" />
 
